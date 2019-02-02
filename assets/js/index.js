@@ -9,9 +9,16 @@ $(document).ready(function() {
     messagingSenderId: "13334029976"
   };
   firebase.initializeApp(config);
-  const mapquestAPIKey = "WZGGE434H2CvVdqnZEQXHxQxmHlxzxGw"; //We'll end up putting this in Firebase
+  const database = firebase.database();
+  const keysRef = database.ref("/keys");
+  let tmAPIKey = "";
+  let mqAPIKey = "";
+  keysRef.on("value", function(snapshot) {
+    tmAPIKey = snapshot.val().tmKey;
+    mpAPIKey = snapshot.val().mqKey;
+  });
   let venueLocation = "1290, Sutter Street, San Francisco, CA 94109"; //Address for the Regency theater taken from Bandsintown
-  let mapquestUrl = `https://www.mapquestapi.com/search/v2/radius?origin=${venueLocation}&radius=0.15&maxMatches=10&ambiguities=ignore&hostedData=mqap.ntpois|group_sic_code=?|581208&outFormat=json&key=${mapquestAPIKey}`;
+  let mapquestUrl = `https://www.mapquestapi.com/search/v2/radius?origin=${venueLocation}&radius=0.15&maxMatches=10&ambiguities=ignore&hostedData=mqap.ntpois|group_sic_code=?|581208&outFormat=json&key=${mqAPIKey}`;
   $.ajax({
     url: mapquestUrl,
     method: "GET"
@@ -23,7 +30,6 @@ $(document).ready(function() {
   let venueRadius = 100; //miles
   let listAmount = 10;
   let genreId = "KnvZfZ7vAeA";
-  let tmAPIKey = "ShOa73z7D1KPqcGDilwmaBzcsS1BxhXt";
   let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${tmAPIKey}&radius=${venueRadius}&city=${concertCity}&endDateTime=2019-02-10T12:00:00Z&segmentName=Music&keyword=${tmKeyword}&genreId=${genreId}`;
   const GENREIDS = {
     danceElectronic: "KnvZfZ7vAvF",
