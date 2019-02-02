@@ -1,4 +1,4 @@
-# Project-1
+# Dinner and a Show
 Project 1
 
 Project Name- GroovGrub
