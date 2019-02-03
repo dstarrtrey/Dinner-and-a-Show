@@ -1,0 +1,12 @@
+
+
+
+footer {
+
+    /* Delete position if content is larger than a page  or readjust*/
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:auto;
+
+}
