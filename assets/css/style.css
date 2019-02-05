@@ -1,12 +1,13 @@
-
-
-
-footer {
-
-    /* Delete position if content is larger than a page  or readjust*/
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:auto;
-
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+.page-footer {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    height: 70px;
 }

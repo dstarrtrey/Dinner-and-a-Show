@@ -9,175 +9,201 @@
         <title>GroovGrub</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+        <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script>
+            $(document).ready(function() {
+                $('select').formSelect();
+                $('.datepicker').datepicker();
+        });</script>
     </head>
     <body>
-
-
         <header>
-
             <nav>
-
                 <div class="nav-wrapper">
-                  <a href="#" class="brand-logo center">Dinner and a Show</a>
-                  <ul id="nav-mobile" class="left hide-on-med-and-down">
-                  </ul>
+                <a href="#" class="brand-logo center">Dinner and a Show</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                </ul>
                 </div>
-
             </nav>
-
         </header>
-        
-        
+        <div class="contain">
+            <div class="row">
 
-        <div class="row">
-
-            <!-- Auto Detect Location and give 3 Event and 3 Restaurant -->
-                    <div class="col s6 m2">
-                          <div class="card blue-grey darken-1">
-                                <div class="card-content white-text">
-                                    <span class="card-title center">Suggested Artist</span>
-                                    <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
+                <!-- Auto Detect Location and give 3 Event and 3 Restaurant -->
+                        <div class="col s6 m4 l2">
+                            <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Suggested Artist</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                <a href="#">This is a link</a>
                                 </div>
-                            <div class="card-action center">
-                              <a href="#">This is a link</a>
                             </div>
-                          </div>
-                    </div>
+                        </div>
 
 
-                    <div class="col s6 m2">
-                            <div class="card blue-grey darken-1">
-                                  <div class="card-content white-text">
-                                      <span class="card-title center">Suggested Artist</span>
-                                      <p>I am a very simple card. I am good at containing small bits of information.
-                                      I am convenient because I require little markup to use effectively.</p>
-                                  </div>
-                              <div class="card-action center">
-                                <a href="#">This is a link</a>
-                              </div>
+                        <div class="col s6 m4 l2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Suggested Artist</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                    <a href="#">This is a link</a>
+                                </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col s6 m4 l2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Suggested Artist</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                    <a href="#">This is a link</a>
+                                </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col s6 m4 l2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Restaurant</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                    <a href="#">This is a link</a>
+                                </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col s6 m4 l2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Restaurant</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                    <a href="#">This is a link</a>
+                                </div>
+                                </div>
+                        </div>
+
+                        <div class="col s6 m4 l2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title center">Restaurant</span>
+                                        <p>I am a very simple card. I am good at containing small bits of information.
+                                        I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                <div class="card-action center">
+                                    <a href="#">This is a link</a>
+                                </div>
+                                </div>
+                        </div>
+            </div>
+            <div class="row">
+                <form class="col s12" id="filter">
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <input placeholder="Filter By Keyword" id="keyword" type="text" class="validate">
+                            <label for="keyword"></label>
+                        </div>
+                        <div class="input-field col s3">
+                            <input id="city" placeholder="Filter By City" type="text" class="validate">
+                            <label for="city"></label>
+                        </div>
+                        <div class="input-field col s3">
+                            <div class="col s6">
+                                <input type="text" id="start-date" class="datepicker">
+                                <label for="start-date">Only After</label>
                             </div>
-                    </div>
-
-
-                    <div class="col s6 m2">
-                            <div class="card blue-grey darken-1">
-                                  <div class="card-content white-text">
-                                      <span class="card-title center">Suggested Artist</span>
-                                      <p>I am a very simple card. I am good at containing small bits of information.
-                                      I am convenient because I require little markup to use effectively.</p>
-                                  </div>
-                              <div class="card-action center">
-                                <a href="#">This is a link</a>
-                              </div>
+                            <div class="col s6">
+                                <input type="text" id="end-date" class="datepicker">
+                                <label for="end-date">Only Before</label>
                             </div>
+                        </div>
+                        <div class="input-field col s1">
+                            <input type="number" id="range" value="10">
+                            <label for="range">Range (Miles)</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <select multiple id="genre">
+                                <option value="" disabled selected>Choose Genre</option>
+                                <option value="danceElectronic">Dance/Electronic</option>
+                                <option value="rock">Rock</option>
+                                <option value="alternative">Alternative</option>
+                                <option value="pop">Pop</option>
+                                <option value="country">Country</option>
+                                <option value="bluesJazz">Jazz/Blues</option>
+                                <option value="rhythmAndBlues">R&B</option>
+                                <option value="classical">Classical</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label>Filter by Genre</label>
+                        </div>
                     </div>
-
-
-                    <div class="col s6 m2">
-                            <div class="card blue-grey darken-1">
-                                  <div class="card-content white-text">
-                                      <span class="card-title center">Restaurant</span>
-                                      <p>I am a very simple card. I am good at containing small bits of information.
-                                      I am convenient because I require little markup to use effectively.</p>
-                                  </div>
-                              <div class="card-action center">
-                                <a href="#">This is a link</a>
-                              </div>
-                            </div>
+                    <div class="row">  
+                        <div class="col s12 center">    
+                            <button class="btn waves-effect waves-light btn-large red lighten-2" class="submit" type="submit" name="action">Show Me Shows!
+                                <i class="material-icons right">music_note</i>
+                            </button>
+                        </div>
                     </div>
-
-
-                    <div class="col s6 m2">
-                            <div class="card blue-grey darken-1">
-                                  <div class="card-content white-text">
-                                      <span class="card-title center">Restaurant</span>
-                                      <p>I am a very simple card. I am good at containing small bits of information.
-                                      I am convenient because I require little markup to use effectively.</p>
-                                  </div>
-                              <div class="card-action center">
-                                <a href="#">This is a link</a>
-                              </div>
-                            </div>
-                    </div>
-
-                    <div class="col s6 m2">
-                            <div class="card blue-grey darken-1">
-                                  <div class="card-content white-text">
-                                      <span class="card-title center">Restaurant</span>
-                                      <p>I am a very simple card. I am good at containing small bits of information.
-                                      I am convenient because I require little markup to use effectively.</p>
-                                  </div>
-                              <div class="card-action center">
-                                <a href="#">This is a link</a>
-                              </div>
-                            </div>
-                    </div>
-
-
-        </div>
+                </form>
+            </div>
 
 
 
+            <div class="row">
+                <div class="col s6 m6 l6">
+                    Ticket master: EVENT DISCOVERY WIDGET
+                    Events Nearby Auto Gen
+                </div>
+                <div class="col s6 m6 l6">
+                    Ticket master: CALENDAR WIDGET
+                    Self Input Calendar
+                </div>
+            </div>
+        
 
-        <div class="row">
+            
+            <div class="row">
 
 
                     <div class="col s6 m6 l6">
 
-                        Ticket master: EVENT DISCOVERY WIDGET
-                        Events Nearby Auto Gen
+                        
+                        Ticket master: MAP WIDGET
+                        Self Input Map Location
+                        
 
-                    </div>
+                    </div>        
 
                     <div class="col s6 m6 l6">
                 
-                        Ticket master: CALENDAR WIDGET
-                        Self Input Calendar
+                        QuestMap Resturant Map
 
-                    </div>
-
-
-        </div>
-    
-
-        
-        <div class="row">
+                    </div>    
 
 
-                <div class="col s6 m6 l6">
-
-                    
-                    Ticket master: MAP WIDGET
-                    Self Input Map Location
-                    
-
-                </div>        
-
-                <div class="col s6 m6 l6">
-            
-                    QuestMap Resturant Map
-
-                </div>    
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        
-
-        
+            </div>
+        </div>         
         <footer class="page-footer">
             <div class="footer-copyright center">
               <div class="container">
@@ -185,9 +211,7 @@
               </div>
             </div>
         </footer>
-        
-
-        
         <script src="assets/js/index.js" async defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>
