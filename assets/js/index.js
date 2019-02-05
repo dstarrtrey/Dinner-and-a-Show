@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  
   // Initialize Firebase
   const config = {
     apiKey: "AIzaSyCvkOVvVayLKYdleuDnuqxCBS9jHgnrzFk",
@@ -14,36 +13,56 @@ $(document).ready(function() {
   const keysRef = database.ref("/keys");
   let venueLocation = "1290, Sutter Street, San Francisco, CA 94109"; //Address for the Regency theater taken from Bandsintown
   let tmKeyword = "";
+  let tmCity = "";
+  let tmState = "";
+  let tmRange = 10;
+  let tmStartDate = "";
+  let tmEndDate = "";
+  let tmGenre;
   let tmAPIKey = "";
   let mqAPIKey = "";
   let concertCity = "San Francisco";
   let venueRadius = 100; //miles
-  let listAmount = 10;
+  let listAmount = 20;
   let genreId = "KnvZfZ7vAeA";
   const GENREIDS = {
-    danceElectronic: "KnvZfZ7vAvF",
-    rock: "KnvZfZ7vAeA",
-    hipHopRap: "KnvZfZ7vAv1",
-    pop: "KnvZfZ7vAev",
-    misc: "KnvZfZ7v7le",
-    country: "KnvZfZ7vAv6",
-    classical: "KnvZfZ7vAeJ",
-    alternative: "KnvZfZ7vAvv",
-    bluesJazz: "KnvZfZ7vAvd",
-    rhythmAndBlues: "KnvZfZ7vAee",
+    danceElectronic: ["KnvZfZ7vAvF"],
+    rock: ["KnvZfZ7vAeA"],
+    hipHopRap: ["KnvZfZ7vAv1"],
+    pop: ["KnvZfZ7vAev"],
+    misc: ["KnvZfZ7v7le"],
+    country: ["KnvZfZ7vAv6"],
+    classical: ["KnvZfZ7vAeJ"],
+    alternative: ["KnvZfZ7vAvv"],
+    bluesJazz: ["KnvZfZ7vAvd"],
+    rhythmAndBlues: ["KnvZfZ7vAee"],
     other: ["KnvZfZ7vAva", "Music", "KnvZfZ7vAed", "KnvZfZ7vAeF"]
   };
+  const ifDate = date => {
+    if (date) {
+      return date + "T00:00:00Z";
+    } else {
+      return "";
+    }
+  };
   const TMASTER = async key => {
-    let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${venueRadius}&city=${concertCity}&endDateTime=2019-02-10T12:00:00Z&segmentName=Music&keyword=${tmKeyword}&genreId=${genreId}`;
+    let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${tmRange}&city=${tmCity}&startDateTime=${ifDate(
+      tmStartDate
+    )}&endDateTime=${ifDate(
+      tmEndDate
+    )}&segmentName=Music&keyword=${tmKeyword}&genreId=${genreId}`;
+    console.log(ticketmasterUrl);
     let request = $.ajax({
       url: ticketmasterUrl,
       method: "GET"
     });
     let result = await request;
+    console.log(result["_embedded"].events);
     result["_embedded"].events.forEach(concert => {
       console.log(mqAPIKey);
       venueLocation = `${concert._embedded.venues[0].address.line1}
         ${concert._embedded.venues[0].city.name}`;
+      console.log(venueLocation);
       MQUEST(mqAPIKey);
     });
   };
@@ -54,12 +73,40 @@ $(document).ready(function() {
       method: "GET"
     });
     let result = await request;
-    console.log("MAPQUEST RESULT", result.searchResults);
+    console.log(result.searchResults);
   };
   keysRef.on("value", async function(snapshot) {
     tmAPIKey = snapshot.val().tmKey;
     mqAPIKey = snapshot.val().mqKey;
     console.log(tmAPIKey);
-    await Promise.all([TMASTER(tmAPIKey)]);
+  });
+  $(document).on("submit", "#filter", function(event) {
+    event.preventDefault();
+    tmKeyword = $("#keyword")
+      .val()
+      .trim()
+      .split(" ")
+      .join("-");
+    tmCity = $("#city")
+      .val()
+      .trim()
+      .split(" ")
+      .join("-");
+    tmRange = $("#range").val();
+    if ($("#start-date").val()) {
+      tmStartDate = moment($("#start-date").val()).format("YYYY-MM-DD");
+    }
+    if ($("#end-date").val()) {
+      tmEndDate = moment($("#end-date").val()).format("YYYY-MM-DD");
+    }
+    tmGenre = $("#genre").val();
+    console.log("Keyword: ", tmKeyword);
+    console.log("City: ", tmCity);
+    console.log("State: ", tmState);
+    console.log("Range: ", tmRange);
+    console.log("Start Date: ", tmStartDate);
+    console.log("End Date: ", tmEndDate);
+    console.log("Genre(s): ", tmGenre);
+    TMASTER(tmAPIKey);
   });
 });

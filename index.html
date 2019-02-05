@@ -9,14 +9,16 @@
         <title>GroovGrub</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+        <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css">
         <script>
             $(document).ready(function() {
                 $('select').formSelect();
+                $('.datepicker').datepicker();
         });</script>
     </head>
     <body>
@@ -116,22 +118,32 @@
                         </div>
             </div>
             <div class="row">
-                <form class="col s12">
+                <form class="col s12" id="filter">
                     <div class="row">
                         <div class="input-field col s3">
-                            <input placeholder="Filter By Artist" id="artist" type="text" class="validate">
-                            <label for="artist"></label>
+                            <input placeholder="Filter By Keyword" id="keyword" type="text" class="validate">
+                            <label for="keyword"></label>
                         </div>
                         <div class="input-field col s3">
-                            <input id="city" placeholder="Filter by City" type="text" class="validate">
+                            <input id="city" placeholder="Filter By City" type="text" class="validate">
                             <label for="city"></label>
                         </div>
                         <div class="input-field col s3">
-                            <input id="venue" placeholder="Filter by Venue" type="text" class="validate">
-                            <label for="venue"></label>
+                            <div class="col s6">
+                                <input type="text" id="start-date" class="datepicker">
+                                <label for="start-date">Only After</label>
+                            </div>
+                            <div class="col s6">
+                                <input type="text" id="end-date" class="datepicker">
+                                <label for="end-date">Only Before</label>
+                            </div>
                         </div>
-                        <div class="input-field col s3">
-                            <select multiple>
+                        <div class="input-field col s1">
+                            <input type="number" id="range" value="10">
+                            <label for="range">Range (Miles)</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <select multiple id="genre">
                                 <option value="" disabled selected>Choose Genre</option>
                                 <option value="danceElectronic">Dance/Electronic</option>
                                 <option value="rock">Rock</option>
@@ -148,7 +160,7 @@
                     </div>
                     <div class="row">  
                         <div class="col s12 center">    
-                            <button class="btn waves-effect waves-light btn-large red lighten-1" class="submit" type="submit" name="action">Show Me Shows!
+                            <button class="btn waves-effect waves-light btn-large red lighten-2" class="submit" type="submit" name="action">Show Me Shows!
                                 <i class="material-icons right">music_note</i>
                             </button>
                         </div>
@@ -159,23 +171,14 @@
 
 
             <div class="row">
-
-
-                        <div class="col s6 m6 l6">
-
-                            Ticket master: EVENT DISCOVERY WIDGET
-                            Events Nearby Auto Gen
-
-                        </div>
-
-                        <div class="col s6 m6 l6">
-                    
-                            Ticket master: CALENDAR WIDGET
-                            Self Input Calendar
-
-                        </div>
-
-
+                <div class="col s6 m6 l6">
+                    Ticket master: EVENT DISCOVERY WIDGET
+                    Events Nearby Auto Gen
+                </div>
+                <div class="col s6 m6 l6">
+                    Ticket master: CALENDAR WIDGET
+                    Self Input Calendar
+                </div>
             </div>
         
 
