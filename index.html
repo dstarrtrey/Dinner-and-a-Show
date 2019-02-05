@@ -9,10 +9,14 @@
         <title>GroovGrub</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script>
+            $(document).ready(function() {
+                $('select').formSelect();
+        });</script>
     </head>
     <body>
 
@@ -36,7 +40,7 @@
         <div class="row">
 
             <!-- Auto Detect Location and give 3 Event and 3 Restaurant -->
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                           <div class="card blue-grey darken-1">
                                 <div class="card-content white-text">
                                     <span class="card-title center">Suggested Artist</span>
@@ -50,7 +54,7 @@
                     </div>
 
 
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                             <div class="card blue-grey darken-1">
                                   <div class="card-content white-text">
                                       <span class="card-title center">Suggested Artist</span>
@@ -64,7 +68,7 @@
                     </div>
 
 
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                             <div class="card blue-grey darken-1">
                                   <div class="card-content white-text">
                                       <span class="card-title center">Suggested Artist</span>
@@ -78,7 +82,7 @@
                     </div>
 
 
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                             <div class="card blue-grey darken-1">
                                   <div class="card-content white-text">
                                       <span class="card-title center">Restaurant</span>
@@ -92,7 +96,7 @@
                     </div>
 
 
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                             <div class="card blue-grey darken-1">
                                   <div class="card-content white-text">
                                       <span class="card-title center">Restaurant</span>
@@ -105,7 +109,7 @@
                             </div>
                     </div>
 
-                    <div class="col s6 m2">
+                    <div class="col s6 m4 l2">
                             <div class="card blue-grey darken-1">
                                   <div class="card-content white-text">
                                       <span class="card-title center">Restaurant</span>
@@ -117,10 +121,45 @@
                               </div>
                             </div>
                     </div>
-
-
         </div>
-
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input placeholder="Filter By Artist" id="artist" type="text" class="validate">
+                        <label for="artist"></label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="city" placeholder="Filter by City" type="text" class="validate">
+                        <label for="city"></label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="city" placeholder="Filter by Venue" type="text" class="validate">
+                        <label for="city"></label>
+                    </div>
+                    <div class="input-field col s3">
+                        <select multiple>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="danceElectronic">Dance/Electronic</option>
+                            <option value="rock">Rock</option>
+                            <option value="alternative">Alternative</option>
+                            <option value="pop">Pop</option>
+                            <option value="country">Country</option>
+                            <option value="bluesJazz">Jazz/Blues</option>
+                            <option value="rhythmAndBlues">R&B</option>
+                            <option value="classical">Classical</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label>Filter by Genre</label>
+                    </div>
+                </div>
+                <div class="row">    
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
 
 
 
@@ -189,5 +228,6 @@
 
         
         <script src="assets/js/index.js" async defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>
