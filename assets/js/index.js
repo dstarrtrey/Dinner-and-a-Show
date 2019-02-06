@@ -15,7 +15,8 @@ $(document).ready(function() {
   let tmKeyword = "";
   let tmCity = "";
   let tmState = "";
-  let tmRange = 10;
+  let tmZipCode = "";
+  let tmRange = 50;
   let tmStartDate = "";
   let tmEndDate = "";
   let tmGenre;
@@ -23,7 +24,7 @@ $(document).ready(function() {
   let mqAPIKey = "";
   let concertCity = "San Francisco";
   let venueRadius = 100; //miles
-  let listAmount = 20;
+  let listAmount = 15;
   let genreId = "KnvZfZ7vAeA";
   const GENREIDS = {
     danceElectronic: ["KnvZfZ7vAvF"],
@@ -46,7 +47,7 @@ $(document).ready(function() {
     }
   };
   const TMASTER = async key => {
-    let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${tmRange}&city=${tmCity}&startDateTime=${ifDate(
+    let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${tmRange}&city=${tmCity}&stateCode=${tmState}&startDateTime=${ifDate(
       tmStartDate
     )}&endDateTime=${ifDate(
       tmEndDate
@@ -92,6 +93,8 @@ $(document).ready(function() {
       .trim()
       .split(" ")
       .join("-");
+    tmState = $("#state-picker").val();
+    tmZipCode = $("#zip-code").val();
     tmRange = $("#range").val();
     if ($("#start-date").val()) {
       tmStartDate = moment($("#start-date").val()).format("YYYY-MM-DD");
@@ -103,6 +106,7 @@ $(document).ready(function() {
     console.log("Keyword: ", tmKeyword);
     console.log("City: ", tmCity);
     console.log("State: ", tmState);
+    console.log("Zip Code: ", tmZipCode);
     console.log("Range: ", tmRange);
     console.log("Start Date: ", tmStartDate);
     console.log("End Date: ", tmEndDate);

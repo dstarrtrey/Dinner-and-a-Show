@@ -124,11 +124,27 @@
                             <input placeholder="Filter By Keyword" id="keyword" type="text" class="validate">
                             <label for="keyword"></label>
                         </div>
-                        <div class="input-field col s3">
-                            <input id="city" placeholder="Filter By City" type="text" class="validate">
-                            <label for="city"></label>
+                        <div class="input-field col s2">
+                            <input placeholder="Filter By City" id="city" type="text" class="validate">
+                            <label for="keyword"></label>
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s1">
+                            <select id="state-picker">
+                              <option value="" disabled selected></option>
+                              <script>
+                                    const states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+                                    states.forEach(state =>{
+                                        $("#state-picker").append($("<option>").val(state).text(state));
+                                    });
+                              </script>
+                            </select>
+                            <label>State</label>
+                        </div>
+                        <div class="input-field col s1">
+                            <input type="text" id="zip-code">
+                            <label for="zip-code">Zip Code</label>
+                        </div>
+                        <div class="input-field col s2">
                             <div class="col s6">
                                 <input type="text" id="start-date" class="datepicker">
                                 <label for="start-date">Only After</label>
@@ -139,7 +155,7 @@
                             </div>
                         </div>
                         <div class="input-field col s1">
-                            <input type="number" id="range" value="10">
+                            <input type="number" id="range" value="50">
                             <label for="range">Range (Miles)</label>
                         </div>
                         <div class="input-field col s2">
