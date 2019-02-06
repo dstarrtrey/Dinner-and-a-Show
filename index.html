@@ -187,46 +187,17 @@
 
 
             <div class="row">
-                <div class="col s6 m6 l6">
-                    
-                            <ul class="collection"> <!-- This is for Genres. Put a default picture on the side with the name of the genre-->
 
-                                    <li class="collection-item avatar">
-                                        <img src="genericGenrePicture" alt="" class="circle">
-                                        <span class="title">Genre:Rock</span>
-                                        <a href="#!" class="secondary-content"></a>
-                                    </li>
-                                    <li class="collection-item avatar">
-                                        <img src="genericGenrePicture" alt="" class="circle">
-                                        <span class="title">Genre:Pop</span>
-                                        <a href="#!" class="secondary-content"></a>
-                                    </li>
-                                    <li class="collection-item avatar">
-                                        <img src="genericGenrePicture" alt="" class="circle">
-                                        <span class="title">Genre:Rap</span>
-                                        <a href="#!" class="secondary-content"></a>
-                                    </li>
-                                    <li class="collection-item avatar">
-                                        <img src="genericGenrePicture" alt="" class="circle">
-                                        <span class="title">Genre:Hipster</span>
-                                        <a href="#!" class="secondary-content"></a>
-                                    </li>
-
-                            </ul>
-                    
-                </div>
-                
-                
-                
                 
                 <div class="col s6 m6 l6">
                     
-                            <table id="concertInfo"> <!-- https://materializecss.com/collections.html#! we could also use this(collections) instead of tables-->
+                            <!-- these are play holders we append over these laters-->
+                            <table id="concertInfo" class="concertInfo"> <!-- https://materializecss.com/collections.html#! we could also use this(collections) instead of tables-->
 
                                     <tr>
-                                        <th>Artist</th>
+                                        <th>Name</th>
                                         <th>Venue</th>
-                                        <th>Price?</th>   <!-- Or only Artist and Venue pop up? -->
+                                        <th>Price</th>
                                     </tr>
                                     <tr>
                                         <td>Aquamantis</td>
@@ -260,67 +231,48 @@
                                     </tr>
                             </table>
 
-                    
+
                 </div>
-                
-            </div>
-        
 
+
+
+                <div class="col s6 m6 l6">
+                
+                            <!-- these are play holders we append over these laters-->
+                            <table id="restaurantInfo" class="restaurantInfo">           
+                                <tr>
+                                    <th>Resturant</th>
+                                    <th>Distance</th>
+                                </tr>
+                                <tr>
+                                    <td>AppleBees</td>
+                                    <td>Really?</td>
+                                </tr>
+                                <tr>
+                                    <td>PandaExpress</td>
+                                    <td>Behind You</td>
+                                </tr>
+                                <tr>
+                                    <td>McDonald</td>
+                                    <td>Some of them are 24/7!</td>
+                                </tr>
+                                <tr>
+                                    <td>5x appendage</td>
+                                    <td>places and places</td>
+                                </tr>
+                            </table>
+
+                                    
+                </div>  
+                    
+                            
+                
             
-            <div class="row">
-
-
-                    <div class="col s6 m6 l6">
-
-                        <form>
-
-                                <label for="artistName">Artist</label>
-                                <input type="text" id="fname" name="fname">
-                                <input type="submit" value="Submit">
-                                <br>
-    
-                                <label for="locationName">Location</label>
-                                <input type="text" id="lname" name="lname">
-                                <input type="submit" value="Submit">
-                                <br>
-                                
-                                <label for="venueName">Venue</label>
-                                <input type="text" id="lname" name="lname">
-                                <input type="submit" value="Submit">
-                                <br>
-    
-                        </form>
-
-
-                    </div>        
-
-                    <div class="col s6 m6 l6">
-                
-
-                    <table id="restaurantInfo">
-
-                        <tr>
-                            <th>Resturant</th>
-                            <th>Location</th>
-                        </tr>
-                        <tr>
-                            <td>AppleBees</td>
-                            <td>Really?</td>
-                        </tr>
-                        <tr>
-                            <td>PandaExpress</td>
-                            <td>Behind You</td>
-                        </tr>
-                        <tr>
-                            <td>McDonald</td>
-                            <td>Some of them are 24/7!</td>
-                        </tr>
-                    </table>
-                        
-                    </div>    
-
-
             </div>
+            
+            
+            
+            
         </div>         
         <footer class="page-footer">
             <div class="footer-copyright center">
