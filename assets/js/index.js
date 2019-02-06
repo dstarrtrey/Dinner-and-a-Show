@@ -11,7 +11,7 @@ $(document).ready(function() {
   firebase.initializeApp(config);
   const database = firebase.database();
   const keysRef = database.ref("/keys");
-  let venueLocation = "1290, Sutter Street, San Francisco, CA 94109"; //Address for the Regency theater taken from Bandsintown
+  let venueLocation = "";
   let tmKeyword = "";
   let tmCity = "";
   let tmState = "";
@@ -20,11 +20,12 @@ $(document).ready(function() {
   let tmStartDate = "";
   let tmEndDate = "";
   let tmGenre;
+  let currentArr = [];
   let tmAPIKey = "";
   let mqAPIKey = "";
   let concertCity = "San Francisco";
   let venueRadius = 100; //miles
-  let listAmount = 15;
+  let listAmount = 10;
   let genreId = "KnvZfZ7vAeA";
   const GENREIDS = {
     danceElectronic: "KnvZfZ7vAvF",
@@ -46,6 +47,11 @@ $(document).ready(function() {
     }
   };
   const TMASTER = async key => {
+    $("#concertInfo").empty().append(`<tr>
+      <th>Name</th>
+      <th>Venue</th>
+      <th>Price</th>
+    </tr>`);
     let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${tmRange}&city=${tmCity}&stateCode=${tmState}&startDateTime=${ifDate(
       tmStartDate
     )}&endDateTime=${ifDate(
@@ -58,12 +64,42 @@ $(document).ready(function() {
     });
     let result = await request;
     console.log(result["_embedded"].events);
-    result["_embedded"].events.forEach(concert => {
-      console.log(mqAPIKey);
+    currentArr = result["_embedded"].events;
+    result["_embedded"].events.forEach((concert, index) => {
+      const newRow = $("<tr>")
+        .attr("id", index)
+        .addClass("concert");
+      newRow.append($("<td>").text(concert.name));
+      newRow.append($("<td>").text(concert._embedded.venues[0].name));
+      newRow.append(
+        $("<td>").text(
+          `${concert.priceRanges[0].min}—${concert.priceRanges[0].max} ${
+            concert.priceRanges[0].currency
+          }`
+        )
+      );
+      console.log(concert._embedded.venues[0].name);
+      $("#concertInfo").append(newRow);
       venueLocation = `${concert._embedded.venues[0].address.line1}
         ${concert._embedded.venues[0].city.name}`;
       console.log(venueLocation);
-      MQUEST(mqAPIKey);
+      SELECTCONCERT(0);
+      //MQUEST(mqAPIKey);
+    });
+  };
+  const SELECTCONCERT = async index => {
+    $(".selected").removeClass("selected");
+    $(`#${index}`).addClass("selected");
+    $("#restaurantInfo")
+      .empty()
+      .append("<tr><th>Resturant</th><th>Distance</th></tr>");
+    let restaurants = await MQUEST(mqAPIKey);
+    console.log(restaurants);
+    restaurants.forEach(restaurant => {
+      console.log("restaurant: ", restaurant);
+      const row = $("<tr>");
+      row.append($("<td>").text(restaurant.name));
+      row.append($("<td>").text(`${restaurant.distance} mi.`));
     });
   };
   const MQUEST = async key => {
@@ -73,8 +109,9 @@ $(document).ready(function() {
       method: "GET"
     });
     let result = await request;
-    console.log(result.searchResults);
+    return result.searchResults;
   };
+  //Firebase API Keys ref
   keysRef.on("value", async function(snapshot) {
     tmAPIKey = snapshot.val().tmKey;
     mqAPIKey = snapshot.val().mqKey;
