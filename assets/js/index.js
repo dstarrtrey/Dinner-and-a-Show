@@ -27,17 +27,16 @@ $(document).ready(function() {
   let listAmount = 15;
   let genreId = "KnvZfZ7vAeA";
   const GENREIDS = {
-    danceElectronic: ["KnvZfZ7vAvF"],
-    rock: ["KnvZfZ7vAeA"],
-    hipHopRap: ["KnvZfZ7vAv1"],
-    pop: ["KnvZfZ7vAev"],
-    misc: ["KnvZfZ7v7le"],
-    country: ["KnvZfZ7vAv6"],
-    classical: ["KnvZfZ7vAeJ"],
-    alternative: ["KnvZfZ7vAvv"],
-    bluesJazz: ["KnvZfZ7vAvd"],
-    rhythmAndBlues: ["KnvZfZ7vAee"],
-    other: ["KnvZfZ7vAva", "Music", "KnvZfZ7vAed", "KnvZfZ7vAeF"]
+    danceElectronic: "KnvZfZ7vAvF",
+    rock: "KnvZfZ7vAeA",
+    hipHopRap: "KnvZfZ7vAv1",
+    pop: "KnvZfZ7vAev",
+    misc: "KnvZfZ7v7le",
+    country: "KnvZfZ7vAv6",
+    classical: "KnvZfZ7vAeJ",
+    alternative: "KnvZfZ7vAvv",
+    bluesJazz: "KnvZfZ7vAvd",
+    rhythmAndBlues: "KnvZfZ7vAee"
   };
   const ifDate = date => {
     if (date) {
@@ -104,7 +103,7 @@ $(document).ready(function() {
     if ($("#end-date").val()) {
       tmEndDate = moment($("#end-date").val()).format("YYYY-MM-DD");
     }
-    tmGenre = $("#genre").val();
+    tmGenre = GENREIDS[$("#genre").val()];
     console.log("Keyword: ", tmKeyword);
     console.log("City: ", tmCity);
     console.log("State: ", tmState);
