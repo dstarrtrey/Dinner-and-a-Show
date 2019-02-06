@@ -11,3 +11,6 @@ body {
     grid-row-end: 4;
     height: 70px;
 }
+.picker__box, .picker__date-display, .picker__weekday-display{
+    background-color: black !important;
+}
