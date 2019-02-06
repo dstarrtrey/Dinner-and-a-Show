@@ -124,13 +124,13 @@
                             <input placeholder="Filter By Keyword" id="keyword" type="text" class="validate">
                             <label for="keyword"></label>
                         </div>
-                        <div class="input-field col s2">
+                        <div class="input-field col s1">
                             <input placeholder="Filter By City" id="city" type="text" class="validate">
                             <label for="keyword"></label>
                         </div>
                         <div class="input-field col s1">
                             <select id="state-picker">
-                              <option value="" disabled selected></option>
+                              <option value=""></option>
                               <script>
                                     const states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
                                     states.forEach(state =>{
@@ -154,29 +154,29 @@
                                 <label for="end-date">Only Before</label>
                             </div>
                         </div>
-                        <div class="input-field col s1">
-                            <input type="number" id="range" value="50">
-                            <label for="range">Range (Miles)</label>
+                        <div class="col s2">
+                            <div class="input-field col s4">
+                                <input type="number" id="range" value="50">
+                                <label for="range">Range (Miles)</label>
+                            </div>
+                            <div class="input-field col s8">
+                                <select id="genre">
+                                    <option value="" disabled selected></option>
+                                    <option value="danceElectronic">Electronic</option>
+                                    <option value="rock">Rock</option>
+                                    <option value="alternative">Alternative</option>
+                                    <option value="pop">Pop</option>
+                                    <option value="country">Country</option>
+                                    <option value="bluesJazz">Jazz/Blues</option>
+                                    <option value="rhythmAndBlues">R&B</option>
+                                    <option value="classical">Classical</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label>Filter by Genre</label>
+                            </div>
                         </div>
                         <div class="input-field col s2">
-                            <select multiple id="genre">
-                                <option value="" disabled selected>Choose Genre</option>
-                                <option value="danceElectronic">Dance/Electronic</option>
-                                <option value="rock">Rock</option>
-                                <option value="alternative">Alternative</option>
-                                <option value="pop">Pop</option>
-                                <option value="country">Country</option>
-                                <option value="bluesJazz">Jazz/Blues</option>
-                                <option value="rhythmAndBlues">R&B</option>
-                                <option value="classical">Classical</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <label>Filter by Genre</label>
-                        </div>
-                    </div>
-                    <div class="row">  
-                        <div class="col s12 center">    
-                            <button class="btn waves-effect waves-light btn-large red lighten-2" class="submit" type="submit" name="action">Show Me Shows!
+                            <button class="btn waves-effect waves-light btn-large red lighten-2" class="submit" type="submit" name="action">Submit
                                 <i class="material-icons right">music_note</i>
                             </button>
                         </div>

@@ -94,7 +94,9 @@ $(document).ready(function() {
       .split(" ")
       .join("-");
     tmState = $("#state-picker").val();
-    tmZipCode = $("#zip-code").val();
+    if ($("#zip-code").val() !== null) {
+      tmZipCode = $("#zip-code").val();
+    }
     tmRange = $("#range").val();
     if ($("#start-date").val()) {
       tmStartDate = moment($("#start-date").val()).format("YYYY-MM-DD");
