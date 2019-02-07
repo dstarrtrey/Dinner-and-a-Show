@@ -39,7 +39,7 @@ $(document).ready(function() {
     bluesJazz: "KnvZfZ7vAvd",
     rhythmAndBlues: "KnvZfZ7vAee"
   };
-  $('.carousel.carousel-slider').carousel({
+  $(".carousel.carousel-slider").carousel({
     fullWidth: true,
     indicators: true
   });
@@ -67,8 +67,8 @@ $(document).ready(function() {
       method: "GET"
     });
     let result = await request;
-    console.log(result["_embedded"].events);
-    currentArr = result["_embedded"].events;
+    console.log("result", result["_embedded"].events);
+    currentArr = await result["_embedded"].events;
     result["_embedded"].events.forEach((concert, index) => {
       const newRow = $("<tr>")
         .attr("id", index)
@@ -84,30 +84,43 @@ $(document).ready(function() {
       );
       console.log(concert._embedded.venues[0].name);
       $("#concertInfo").append(newRow);
-      venueLocation = `${concert._embedded.venues[0].address.line1}
-        ${concert._embedded.venues[0].city.name}`;
-      console.log(venueLocation);
-      SELECTCONCERT(0);
-      //MQUEST(mqAPIKey);
     });
   };
   const SELECTCONCERT = async index => {
+    let restaurants = await MQUEST(mqAPIKey);
+    venueLocation = `${currentArr[index]._embedded.venues[0].address.line1}
+        ${currentArr[index]._embedded.venues[0].city.name}`;
+    console.log(venueLocation);
+    console.log("currentArr: ", currentArr);
     $(".selected").removeClass("selected");
-    $(`#${index}`).addClass("selected");
     $("#restaurantInfo")
       .empty()
       .append("<tr><th>Resturant</th><th>Distance</th></tr>");
-    let restaurants = await MQUEST(mqAPIKey);
-    console.log(restaurants);
-    restaurants.forEach(restaurant => {
-      console.log("restaurant: ", restaurant);
-      const row = $("<tr>");
-      row.append($("<td>").text(restaurant.name));
-      row.append($("<td>").text(`${restaurant.distance} mi.`));
-    });
+    $(`#${index}`).addClass("selected");
+    if (!restaurants) {
+      $("#restaurantInfo").append(
+        "<tr><td>No restaurants found! (Sorry)</td></tr>"
+      );
+    } else {
+      restaurants.forEach(restaurant => {
+        console.log("restaurant: ", restaurant);
+        const link = $("<a>")
+          .attr(
+            "href",
+            `https://www.google.com/maps/search/${restaurant.name} ${
+              restaurant.fields.address
+            } ${restaurant.fields.city} ${restaurant.fields.country}`
+          )
+          .attr("target", "_blank");
+        const row = $("<tr>");
+        row.append(link.append($("<td>").text(restaurant.name)));
+        row.append($("<td>").text(`${restaurant.distance} mi.`));
+        $("#restaurantInfo").append(row);
+      });
+    }
   };
   const MQUEST = async key => {
-    let mapquestUrl = `https://www.mapquestapi.com/search/v2/radius?origin=${venueLocation}&radius=0.15&maxMatches=10&ambiguities=ignore&hostedData=mqap.ntpois|group_sic_code=?|581208&outFormat=json&key=${key}`;
+    let mapquestUrl = `https://www.mapquestapi.com/search/v2/radius?origin=${venueLocation}&radius=1&maxMatches=10&ambiguities=ignore&hostedData=mqap.ntpois|group_sic_code=?|581208&outFormat=json&key=${key}`;
     let request = $.ajax({
       url: mapquestUrl,
       method: "GET"
@@ -153,6 +166,9 @@ $(document).ready(function() {
     console.log("Start Date: ", tmStartDate);
     console.log("End Date: ", tmEndDate);
     console.log("Genre(s): ", tmGenre);
-    TMASTER(tmAPIKey);
+    TMASTER(tmAPIKey).then(SELECTCONCERT(0));
+  });
+  $(document).on("click", ".concert", function() {
+    SELECTCONCERT(parseInt($(this).attr("id")));
   });
 });

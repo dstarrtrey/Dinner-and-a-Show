@@ -17,6 +17,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     background-image: url("../images/citynight.jpg");
+    background-color: #1e1e1e;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -34,4 +35,7 @@ body {
     margin: 10px;
     height: auto;
     width: auto;
+}
+.selected{
+    border: 2px solid orangered;
 }
