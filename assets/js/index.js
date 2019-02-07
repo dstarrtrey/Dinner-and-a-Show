@@ -39,6 +39,10 @@ $(document).ready(function() {
     bluesJazz: "KnvZfZ7vAvd",
     rhythmAndBlues: "KnvZfZ7vAee"
   };
+  $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true
+  });
   const ifDate = date => {
     if (date) {
       return date + "T00:00:00Z";

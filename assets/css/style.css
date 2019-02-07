@@ -1,3 +1,14 @@
+*  {
+    color: white;
+}
+.btn {
+    font-family: 'Permanent Marker', cursive;
+}
+.nav-wrapper{
+    height: auto;
+    width: auto;
+    font-family: 'Kaushan Script', cursive;
+}
 html {
     height: 100%;
 }
@@ -5,12 +16,22 @@ body {
     min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    background-image: url("../images/citynight.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .page-footer {
     grid-row-start: 3;
     grid-row-end: 4;
     height: 70px;
+    font-family: 'Permanent Marker', cursive;
 }
 .picker__box, .picker__date-display, .picker__weekday-display{
     background-color: black !important;
+}
+.carousel{
+    font-family: 'Permanent Marker', cursive;
+    margin: 10px;
+    height: auto;
+    width: auto;
 }
