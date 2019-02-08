@@ -71,10 +71,16 @@ $(document).ready(function() {
     console.log("result", result["_embedded"].events);
     currentArr = await result["_embedded"].events;
     currentArr.forEach((concert, index) => {
+      const linkMaster = $("<a>")
+      .attr(
+        "href",
+        `https://www.ticketmaster.com/search?q=${concert.name}`
+      )
+      .attr("target", "_blank");
       const newRow = $("<tr>")
         .attr("id", index)
         .addClass("concert");
-      newRow.append($("<td>").text(concert.name));
+      newRow.append(linkMaster.append($("<td>").text(concert.name)));
       newRow.append($("<td>").text(concert._embedded.venues[0].name));
       let statePlace = "";
       if (concert._embedded.venues[0].country.countryCode === "US") {
@@ -106,7 +112,7 @@ $(document).ready(function() {
     $(".selected").removeClass("selected");
     $("#restaurantInfo")
       .empty()
-      .append("<tr><th>Resturant</th><th>Distance</th></tr>");
+      .append("<tr><th>Restaurant</th><th>Distance</th></tr>");
     $(`#${index}`).addClass("selected");
     if (!restaurants) {
       $("#restaurantInfo").append(
