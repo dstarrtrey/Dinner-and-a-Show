@@ -19,7 +19,7 @@ body {
     background-image: url("../images/citynight.jpg");
     background-color: #1e1e1e;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 2000px 1500px;
 }
 .page-footer {
     grid-row-start: 3;
