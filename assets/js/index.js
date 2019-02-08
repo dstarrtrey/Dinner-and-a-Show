@@ -41,6 +41,22 @@ $(document).ready(function() {
     fullWidth: true,
     indicators: true
   });
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(savePosition);
+    } else {
+      console.log("no geolocation :(");
+    }
+  };
+  let latLong = [];
+  const savePosition = position => {
+    latLong = [position.coords.latitude, position.coords.longitude];
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    DO THE CAROUSEL STUFF HERE PLEASE!!!!!~ ~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    console.log(latLong);
+  };
+  getLocation();
   const ifDate = date => {
     if (date) {
       return date + "T00:00:00Z";
