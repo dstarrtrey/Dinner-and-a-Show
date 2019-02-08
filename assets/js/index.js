@@ -51,10 +51,20 @@ $(document).ready(function() {
   let latLong = [];
   const savePosition = position => {
     latLong = [position.coords.latitude, position.coords.longitude];
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    DO THE CAROUSEL STUFF HERE PLEASE!!!!!~ ~~~~~~~~~~~~~~~~~~~~~~~
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    console.log(latLong);
+    const myGeohash = Geohash.encode(latLong[0], latLong[1], 9);
+    carouselReq(myGeohash);
+    console.log(Geohash.encode(latLong[0], latLong[1], 9));
+  };
+  const carouselReq = async hash => {
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?size=3&apikey=ShOa73z7D1KPqcGDilwmaBzcsS1BxhXt&radius=100&geoPoint=${hash}&segmentName=music`;
+    let request = $.ajax({
+      url: url,
+      method: "GET"
+    });
+    let response = await request;
+    console.log("I requested!");
+    console.log(response._embedded.events);
+    //call a function that puts this^ into the carousel (or creates the carousel)
   };
   getLocation();
   const ifDate = date => {
