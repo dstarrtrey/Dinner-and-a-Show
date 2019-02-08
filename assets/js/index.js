@@ -23,7 +23,6 @@ $(document).ready(function() {
   let currentArr = [];
   let tmAPIKey = "";
   let mqAPIKey = "";
-  let currentMQ = [];
   let concertCity = "San Francisco";
   let venueRadius = 100; //miles
   let listAmount = 10;
@@ -52,7 +51,6 @@ $(document).ready(function() {
     }
   };
   const TMASTER = async key => {
-    currentMQ = [];
     $("#concertInfo").empty().append(`<tr>
       <th>Name</th>
       <th>Venue</th>
@@ -78,11 +76,15 @@ $(document).ready(function() {
         .addClass("concert");
       newRow.append($("<td>").text(concert.name));
       newRow.append($("<td>").text(concert._embedded.venues[0].name));
+      let statePlace = "";
+      if (concert._embedded.venues[0].country.countryCode === "US") {
+        statePlace = concert._embedded.venues[0].state.stateCode;
+      } else {
+        statePlace = concert._embedded.venues[0].country.countryCode;
+      }
       newRow.append(
         $("<td>").text(
-          concert._embedded.venues[0].city.name +
-            ", " +
-            concert._embedded.venues[0].state.stateCode
+          concert._embedded.venues[0].city.name + ", " + statePlace
         )
       );
       newRow.append(
@@ -94,14 +96,13 @@ $(document).ready(function() {
       );
       $("#concertInfo").append(newRow);
     });
-    console.log(await currentMQ);
   };
   const SELECTCONCERT = async index => {
+    let restaurants = await MQUEST(mqAPIKey);
     venueLocation = `${currentArr[index]._embedded.venues[0].address.line1}
         ${currentArr[index]._embedded.venues[0].city.name}`;
     console.log(venueLocation);
     console.log("currentArr: ", currentArr);
-    let restaurants = await MQUEST(mqAPIKey);
     $(".selected").removeClass("selected");
     $("#restaurantInfo")
       .empty()
