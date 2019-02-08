@@ -16,13 +16,14 @@ $(document).ready(function() {
   let tmCity = "";
   let tmState = "";
   let tmZipCode = "";
-  let tmRange = 50;
+  let tmRange = 1000000;
   let tmStartDate = "";
   let tmEndDate = "";
   let tmGenre;
   let currentArr = [];
   let tmAPIKey = "";
   let mqAPIKey = "";
+  let currentMQ = [];
   let concertCity = "San Francisco";
   let venueRadius = 100; //miles
   let listAmount = 10;
@@ -51,9 +52,11 @@ $(document).ready(function() {
     }
   };
   const TMASTER = async key => {
+    currentMQ = [];
     $("#concertInfo").empty().append(`<tr>
       <th>Name</th>
       <th>Venue</th>
+      <th>City</th>
       <th>Price</th>
     </tr>`);
     let ticketmasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=${listAmount}&apikey=${key}&radius=${tmRange}&city=${tmCity}&stateCode=${tmState}&startDateTime=${ifDate(
@@ -69,7 +72,7 @@ $(document).ready(function() {
     let result = await request;
     console.log("result", result["_embedded"].events);
     currentArr = await result["_embedded"].events;
-    result["_embedded"].events.forEach((concert, index) => {
+    currentArr.forEach((concert, index) => {
       const newRow = $("<tr>")
         .attr("id", index)
         .addClass("concert");
@@ -77,21 +80,28 @@ $(document).ready(function() {
       newRow.append($("<td>").text(concert._embedded.venues[0].name));
       newRow.append(
         $("<td>").text(
+          concert._embedded.venues[0].city.name +
+            ", " +
+            concert._embedded.venues[0].state.stateCode
+        )
+      );
+      newRow.append(
+        $("<td>").text(
           `${concert.priceRanges[0].min}—${concert.priceRanges[0].max} ${
             concert.priceRanges[0].currency
           }`
         )
       );
-      console.log(concert._embedded.venues[0].name);
       $("#concertInfo").append(newRow);
     });
+    console.log(await currentMQ);
   };
   const SELECTCONCERT = async index => {
-    let restaurants = await MQUEST(mqAPIKey);
     venueLocation = `${currentArr[index]._embedded.venues[0].address.line1}
         ${currentArr[index]._embedded.venues[0].city.name}`;
     console.log(venueLocation);
     console.log("currentArr: ", currentArr);
+    let restaurants = await MQUEST(mqAPIKey);
     $(".selected").removeClass("selected");
     $("#restaurantInfo")
       .empty()
