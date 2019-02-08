@@ -23,8 +23,6 @@ $(document).ready(function() {
   let currentArr = [];
   let tmAPIKey = "";
   let mqAPIKey = "";
-  let concertCity = "San Francisco";
-  let venueRadius = 100; //miles
   let listAmount = 10;
   let genreId = "KnvZfZ7vAeA";
   const GENREIDS = {
@@ -67,41 +65,42 @@ $(document).ready(function() {
       url: ticketmasterUrl,
       method: "GET"
     });
+    const useData = async req => {
+      console.log("result", req["_embedded"].events);
+      currentArr = req["_embedded"].events;
+      console.log("currentArr: ", currentArr);
+      currentArr.forEach((concert, index) => {
+        const linkMaster = $("<a>")
+          .attr("href", `https://www.ticketmaster.com/search?q=${concert.name}`)
+          .attr("target", "_blank");
+        const newRow = $("<tr>")
+          .attr("id", index)
+          .addClass("concert");
+        newRow.append(linkMaster.append($("<td>").text(concert.name)));
+        newRow.append($("<td>").text(concert._embedded.venues[0].name));
+        let statePlace = "";
+        if (concert._embedded.venues[0].country.countryCode === "US") {
+          statePlace = concert._embedded.venues[0].state.stateCode;
+        } else {
+          statePlace = concert._embedded.venues[0].country.countryCode;
+        }
+        newRow.append(
+          $("<td>").text(
+            concert._embedded.venues[0].city.name + ", " + statePlace
+          )
+        );
+        let price = "   ";
+        if ("priceRanges" in concert) {
+          price = `${concert.priceRanges[0].min}—${
+            concert.priceRanges[0].max
+          } ${concert.priceRanges[0].currency}`;
+        }
+        newRow.append($("<td>").text(price));
+        $("#concertInfo").append(newRow);
+      });
+    };
     let result = await request;
-    console.log("result", result["_embedded"].events);
-    currentArr = await result["_embedded"].events;
-    currentArr.forEach((concert, index) => {
-      const linkMaster = $("<a>")
-      .attr(
-        "href",
-        `https://www.ticketmaster.com/search?q=${concert.name}`
-      )
-      .attr("target", "_blank");
-      const newRow = $("<tr>")
-        .attr("id", index)
-        .addClass("concert");
-      newRow.append(linkMaster.append($("<td>").text(concert.name)));
-      newRow.append($("<td>").text(concert._embedded.venues[0].name));
-      let statePlace = "";
-      if (concert._embedded.venues[0].country.countryCode === "US") {
-        statePlace = concert._embedded.venues[0].state.stateCode;
-      } else {
-        statePlace = concert._embedded.venues[0].country.countryCode;
-      }
-      newRow.append(
-        $("<td>").text(
-          concert._embedded.venues[0].city.name + ", " + statePlace
-        )
-      );
-      newRow.append(
-        $("<td>").text(
-          `${concert.priceRanges[0].min}—${concert.priceRanges[0].max} ${
-            concert.priceRanges[0].currency
-          }`
-        )
-      );
-      $("#concertInfo").append(newRow);
-    });
+    useData(result);
   };
   const SELECTCONCERT = async index => {
     let restaurants = await MQUEST(mqAPIKey);
