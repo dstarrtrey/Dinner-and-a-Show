@@ -42,12 +42,15 @@ body {
 .carousel-img{
     height: 200px;
     width: auto;
-    border: 3px solid pink;
 }
 .carousel-row{
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    margin: 10px;
+    width: auto;
     height: 0;
     transition: height 1s ease-in-out;
-    background-color: #383838;
+    background-color: #292828;
 }
 .carousel-row h2{
     margin-top: 0;
