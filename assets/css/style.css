@@ -39,3 +39,12 @@ body {
 .selected{
     border: 2px solid orangered;
 }
+.carousel-img{
+    height: 200px;
+    width: auto;
+    border: 3px solid pink;
+}
+.carousel-row{
+    overflow: hidden !important;
+    display: block;
+}
