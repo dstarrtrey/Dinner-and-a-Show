@@ -62,9 +62,36 @@ $(document).ready(function() {
       method: "GET"
     });
     let response = await request;
-    console.log("I requested!");
     console.log(response._embedded.events);
     //call a function that puts this^ into the carousel (or creates the carousel)
+    for (let x = 1; x <= response._embedded.events.length; x++) {
+      let stateLoc;
+      if (
+        response._embedded.events[x - 1]._embedded.venues[0].country
+          .countryCode === "US"
+      ) {
+        stateLoc =
+          response._embedded.events[x - 1]._embedded.venues[0].state.stateCode;
+      } else {
+        stateLoc =
+          response._embedded.events[x - 1]._embedded.venues[0].country
+            .countryCode;
+      }
+      $(`#c${x}`).text(response._embedded.events[x - 1].name);
+      $(`#v${x}`).text(
+        response._embedded.events[x - 1]._embedded.venues[0].name
+      );
+      $(`#l${x}`).text(
+        response._embedded.events[x - 1]._embedded.venues[0].city.name +
+          ", " +
+          stateLoc
+      );
+      $(`#carousel-${x}`).append(
+        $("<img>")
+          .attr("src", response._embedded.events[x - 1].images[0].url)
+          .addClass("carousel-img")
+      );
+    }
   };
   getLocation();
   const ifDate = date => {
