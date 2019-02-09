@@ -79,28 +79,18 @@ $(document).ready(function() {
           response._embedded.events[i]._embedded.venues[0].country.countryCode;
       }
       $(".carousel-row").html(
-        `<h2>${response._embedded.events[i].name}</h2><p>${
+        `<a target="_blank" href=${response._embedded.events[i].url}><h2>${
+          response._embedded.events[i].name
+        }</h2><p>${
           response._embedded.events[i]._embedded.venues[0].name
-        }</p><p>${stateLoc}</p><img class="carousel-img" src="${
+        }</p><p>${response._embedded.events[i]._embedded.venues[0].city.name +
+          ", " +
+          stateLoc}</p><img class="carousel-img" src="${
           response._embedded.events[i].images[0].url
-        }">`
+        }"></a>`
       );
       i === response._embedded.events.length - 1 ? (i = 0) : i++;
     }, 2000);
-    // for (let x = 1; x <= response._embedded.events.length; x++) {
-    //   let name = $("<h2>").text(response._embedded.events[x - 1].name);
-    //   let venue = $("<p>").text(
-    //     response._embedded.events[x - 1]._embedded.venues[0].name
-    //   );
-    //   let city = $("<p>").text(
-    //     response._embedded.events[x - 1]._embedded.venues[0].city.name +
-    //       ", " +
-    //       stateLoc
-    //   );
-    //   let poster = $("<img>")
-    //     .attr("src", response._embedded.events[x - 1].images[0].url)
-    //     .addClass("carousel-img");
-    // }
   };
   getLocation();
   const ifDate = date => {
@@ -133,7 +123,7 @@ $(document).ready(function() {
       console.log("currentArr: ", currentArr);
       currentArr.forEach((concert, index) => {
         const linkMaster = $("<a>")
-          .attr("href", `https://www.ticketmaster.com/search?q=${concert.name}`)
+          .attr("href", `${concert.url}`)
           .attr("target", "_blank");
         const newRow = $("<tr>")
           .attr("id", index)
@@ -210,7 +200,6 @@ $(document).ready(function() {
   keysRef.on("value", async function(snapshot) {
     tmAPIKey = snapshot.val().tmKey;
     mqAPIKey = snapshot.val().mqKey;
-    console.log(tmAPIKey);
   });
   $(document).on("submit", "#filter", function(event) {
     event.preventDefault();
