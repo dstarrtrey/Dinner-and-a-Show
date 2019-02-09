@@ -1,29 +1,27 @@
 # Dinner and a Show
 Project 1
 
-Project Name- GroovGrub
+Project Name- Dinner and a Show
 
 Group Members- David Starr, Ned Fennell, Michael Bao 
 
-API
-BandsinTown
-Spotify
-QuestMap // Food Location API
+## APIs Used
+Ticketmaster
+MapQuest
 
+## Techonolgy/Libraries
+Jquery—AJAX
+Firebase
+Materialize
+GoogleFonts
+LatLong Geohash
 
-Combine BandsinTown with Spotify
-Play demo of top song of the bands playing
-Return Pictures of Bands hopefully in Spotify API if not, google image api "Cloud Vision API"
-MapQuest for restaurants close by using bandintown's venue identifier 
-
-
-Structure
-Closest Bands Playing
-Popular Bands
-Spotify Queue
-Food Venue-Integrated into concert venue
-
-
-CSS - Look into Materialize, Bulma, Skeleton
-
+## Dinner and a Show
+Dinner and a Show is a website that helps uncertain planners decide on a night out.
+The website uses ticketmaster api along with mapquest api to help users determine their night out.
+Once you open the site, it will ask for your location and it will generate a suggestions on a slideshow for the night out.
+We have a multi purpose search function. We have multiple options for searching events on the night out.
+Once you've found your event, you can click on the artist mYenu to generate restaurant suggestions on the night out.
+You can also click on the event to get a redirect to ticketmaster to purchuse tickets for the night out.
+You can also click on the restauant suggestions for a redirection to googlemaps for the location and information of the restaurant on the night out.
 
