@@ -24,7 +24,7 @@ $(document).ready(function() {
   let tmAPIKey = "";
   let mqAPIKey = "";
   let listAmount = 10;
-  let genreId = "KnvZfZ7vAeA";
+  let genreId = "";
   const GENREIDS = {
     danceElectronic: "KnvZfZ7vAvF",
     rock: "KnvZfZ7vAeA",
@@ -224,7 +224,7 @@ $(document).ready(function() {
     if ($("#end-date").val()) {
       tmEndDate = moment($("#end-date").val()).format("YYYY-MM-DD");
     }
-    tmGenre = GENREIDS[$("#genre").val()];
+    genreId = GENREIDS[$("#genre").val()];
     console.log("Keyword: ", tmKeyword);
     console.log("City: ", tmCity);
     console.log("State: ", tmState);
@@ -232,7 +232,7 @@ $(document).ready(function() {
     console.log("Range: ", tmRange);
     console.log("Start Date: ", tmStartDate);
     console.log("End Date: ", tmEndDate);
-    console.log("Genre(s): ", tmGenre);
+    console.log("Genre(s): ", genreId);
     TMASTER(tmAPIKey).then(SELECTCONCERT(0));
   });
   $(document).on("click", ".concert", function() {
