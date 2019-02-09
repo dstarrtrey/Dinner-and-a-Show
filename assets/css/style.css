@@ -27,9 +27,6 @@ body {
     height: 70px;
     font-family: 'Permanent Marker', cursive;
 }
-.picker__box, .picker__date-display, .picker__weekday-display{
-    background-color: black !important;
-}
 .carousel{
     font-family: 'Permanent Marker', cursive;
     margin: 10px;
