@@ -216,15 +216,25 @@ $(document).ready(function() {
     tmState = $("#state-picker").val();
     if ($("#zip-code").val() !== null) {
       tmZipCode = $("#zip-code").val();
+    } else {
+      tmZipCode = "";
     }
     tmRange = $("#range").val();
     if ($("#start-date").val()) {
       tmStartDate = moment($("#start-date").val()).format("YYYY-MM-DD");
+    } else {
+      tmStartDate = "";
     }
     if ($("#end-date").val()) {
       tmEndDate = moment($("#end-date").val()).format("YYYY-MM-DD");
+    } else {
+      tmEndDate = "";
     }
-    genreId = GENREIDS[$("#genre").val()];
+    if ($("#genre").val()) {
+      genreId = GENREIDS[$("#genre").val()];
+    } else {
+      genreId = "";
+    }
     console.log("Keyword: ", tmKeyword);
     console.log("City: ", tmCity);
     console.log("State: ", tmState);
