@@ -224,7 +224,9 @@ $(document).ready(function() {
     if ($("#end-date").val()) {
       tmEndDate = moment($("#end-date").val()).format("YYYY-MM-DD");
     }
-    genreId = GENREIDS[$("#genre").val()];
+    if ($("#genre").val()) {
+      genreId = GENREIDS[$("#genre").val()];
+    }
     console.log("Keyword: ", tmKeyword);
     console.log("City: ", tmCity);
     console.log("State: ", tmState);
