@@ -45,6 +45,10 @@ body {
     border: 3px solid pink;
 }
 .carousel-row{
-    overflow: hidden !important;
-    display: block;
+    height: 0;
+    transition: height 1s ease-in-out;
+    background-color: #383838;
+}
+.carousel-row h2{
+    margin-top: 0;
 }

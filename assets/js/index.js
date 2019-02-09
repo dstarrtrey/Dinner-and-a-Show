@@ -64,34 +64,43 @@ $(document).ready(function() {
     let response = await request;
     console.log(response._embedded.events);
     //call a function that puts this^ into the carousel (or creates the carousel)
-    for (let x = 1; x <= response._embedded.events.length; x++) {
+    $(".carousel-row").css("height", "400px");
+    let i = 1;
+    setInterval(function() {
       let stateLoc;
       if (
-        response._embedded.events[x - 1]._embedded.venues[0].country
-          .countryCode === "US"
+        response._embedded.events[i]._embedded.venues[0].country.countryCode ===
+        "US"
       ) {
         stateLoc =
-          response._embedded.events[x - 1]._embedded.venues[0].state.stateCode;
+          response._embedded.events[i]._embedded.venues[0].state.stateCode;
       } else {
         stateLoc =
-          response._embedded.events[x - 1]._embedded.venues[0].country
-            .countryCode;
+          response._embedded.events[i]._embedded.venues[0].country.countryCode;
       }
-      $(`#c${x}`).text(response._embedded.events[x - 1].name);
-      $(`#v${x}`).text(
-        response._embedded.events[x - 1]._embedded.venues[0].name
+      $(".carousel-row").html(
+        `<h2>${response._embedded.events[i].name}</h2><p>${
+          response._embedded.events[i]._embedded.venues[0].name
+        }</p><p>${stateLoc}</p><img class="carousel-img" src="${
+          response._embedded.events[i].images[0].url
+        }">`
       );
-      $(`#l${x}`).text(
-        response._embedded.events[x - 1]._embedded.venues[0].city.name +
-          ", " +
-          stateLoc
-      );
-      $(`#carousel-${x}`).append(
-        $("<img>")
-          .attr("src", response._embedded.events[x - 1].images[0].url)
-          .addClass("carousel-img")
-      );
-    }
+      i === response._embedded.events.length - 1 ? (i = 0) : i++;
+    }, 2000);
+    // for (let x = 1; x <= response._embedded.events.length; x++) {
+    //   let name = $("<h2>").text(response._embedded.events[x - 1].name);
+    //   let venue = $("<p>").text(
+    //     response._embedded.events[x - 1]._embedded.venues[0].name
+    //   );
+    //   let city = $("<p>").text(
+    //     response._embedded.events[x - 1]._embedded.venues[0].city.name +
+    //       ", " +
+    //       stateLoc
+    //   );
+    //   let poster = $("<img>")
+    //     .attr("src", response._embedded.events[x - 1].images[0].url)
+    //     .addClass("carousel-img");
+    // }
   };
   getLocation();
   const ifDate = date => {
