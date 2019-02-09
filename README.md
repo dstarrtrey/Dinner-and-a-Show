@@ -1,16 +1,16 @@
 # Dinner and a Show
 Project 1
 
-Project Name- Dinner and a Show
+Project Name — Dinner and a Show
 
-Group Members- David Starr, Ned Fennell, Michael Bao 
+Group Members — David Starr, Ned Fennell, Michael Bao 
 
 ## APIs Used
 Ticketmaster
 MapQuest
 
 ## Techonolgy/Libraries
-Jquery—AJAX
+Jquery — AJAX
 Firebase
 Materialize
 GoogleFonts
